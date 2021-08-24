@@ -35,10 +35,10 @@ library(jtools)
 ## DEFINE DATA AND OUTPUT DIRECTORIES -----------------
 
 # Define analysis folder
-dirAnalysis <- "D:/MPH_Samya/Template"
+dirAnalysis <- "D:/Users/Visitor/Analysisfolder"
 
 # Define data folder
-dirData <- "D:/prescribingdata"
+dirData <- "D:/Users/Visitor/prescribingdata"
 
 # Set WD to analysis folder
 setwd(dirAnalysis)
@@ -535,55 +535,6 @@ setwd(dirAnalysis)
 write.csv(data1, "2019_12_filtered.csv", row.names=F) # save
 rm(data, data1) # remove unwanted data
 
-# setwd(dirData)
-# data <- fread("EPD_202001.csv", header=T,sep = ',')
-# data1 <- data[data$`BNF_CODE` %in% keep, ] # filter by BNF codes in "keep"
-# data1 <- data1[,c(1,6,7,8,9,15,16,17,18,20,21,22,23,24,25)] # keep columns of interest only
-# setwd(dirAnalysis)
-# write.csv(data1, "2020_01_filtered.csv", row.names=F) # save
-# rm(data, data1) # remove unwanted data
-# 
-# setwd(dirData)
-# data <- fread("EPD_202002.csv", header=T,sep = ',')
-# data1 <- data[data$`BNF_CODE` %in% keep, ] # filter by BNF codes in "keep"
-# data1 <- data1[,c(1,6,7,8,9,15,16,17,18,20,21,22,23,24,25)] # keep columns of interest only
-# setwd(dirAnalysis)
-# write.csv(data1, "2020_02_filtered.csv", row.names=F) # save
-# rm(data, data1) # remove unwanted data
-# 
-# setwd(dirData)
-# data <- fread("EPD_202003.csv", header=T,sep = ',')
-# data1 <- data[data$`BNF_CODE` %in% keep, ] # filter by BNF codes in "keep"
-# data1 <- data1[,c(1,6,7,8,9,15,16,17,18,20,21,22,23,24,25)] # keep columns of interest only
-# setwd(dirAnalysis)
-# write.csv(data1, "2020_03_filtered.csv", row.names=F) # save
-# rm(data, data1) # remove unwanted data
-# 
-# setwd(dirData)
-# data <- fread("EPD_202004.csv", header=T,sep = ',')
-# data1 <- data[data$`BNF_CODE` %in% keep, ] # filter by BNF codes in "keep"
-# data1 <- data1[,c(1,6,7,8,9,15,16,17,18,20,21,22,23,24,25)] # keep columns of interest only
-# setwd(dirAnalysis)
-# write.csv(data1, "2020_04_filtered.csv", row.names=F) # save
-# rm(data, data1) # remove unwanted data
-# 
-# setwd(dirData)
-# data <- fread("EPD_202005.csv", header=T,sep = ',')
-# data1 <- data[data$`BNF_CODE` %in% keep, ] # filter by BNF codes in "keep"
-# data1 <- data1[,c(1,6,7,8,9,15,16,17,18,20,21,22,23,24,25)] # keep columns of interest only
-# setwd(dirAnalysis)
-# write.csv(data1, "2020_05_filtered.csv", row.names=F) # save
-# rm(data, data1) # remove unwanted data
-# 
-# setwd(dirData)
-# data <- fread("EPD_202006.csv", header=T,sep = ',')
-# data1 <- data[data$`BNF_CODE` %in% keep, ] # filter by BNF codes in "keep"
-# data1 <- data1[,c(1,6,7,8,9,15,16,17,18,20,21,22,23,24,25)] # keep columns of interest only
-# setwd(dirAnalysis)
-# write.csv(data1, "2020_06_filtered.csv", row.names=F) # save
-# rm(data, data1) # remove unwanted data
-
-
 
 # read in all filtered monthly data frames 
 
@@ -649,12 +600,7 @@ data201909 <- read.csv("2019_09_filtered.csv")
 data201910 <- read.csv("2019_10_filtered.csv")
 data201911 <- read.csv("2019_11_filtered.csv")
 data201912 <- read.csv("2019_12_filtered.csv")
-# data202001 <- read.csv("2020_01_filtered.csv")
-# data202002 <- read.csv("2020_02_filtered.csv")
-# data202003 <- read.csv("2020_03_filtered.csv")
-# data202004 <- read.csv("2020_04_filtered.csv")
-# data202005 <- read.csv("2020_05_filtered.csv")
-# data202006 <- read.csv("2020_06_filtered.csv")
+
 
 
 ## LINK OTHER PRACTICE DATA AND AGGREGATE BY MONTH ----------------
@@ -1027,42 +973,6 @@ names(listsize201912) <- c("PRACTICE", "LIST.SIZE")
 data201912 <- ddply(data201912,.(PRACTICE_CODE, YEAR_MONTH),summarise,ITEMS = sum(QUANTITY),ACT.COST = sum(ACTUAL_COST))
 names(data201912) <- c("PRACTICE", "PERIOD", "ITEMS","ACT.COST") 
 data201912 <- merge(data201912,listsize201912,by="PRACTICE") 
-
-# listsize202001 <- read.csv("2020_01_listsize.csv")[,c(6,10)] 
-# names(listsize202001) <- c("PRACTICE", "LIST.SIZE") 
-# data202001 <- ddply(data202001,.(PRACTICE_CODE, YEAR_MONTH),summarise,ITEMS = sum(QUANTITY),ACT.COST = sum(ACTUAL_COST))
-# names(data202001) <- c("PRACTICE", "PERIOD", "ITEMS","ACT.COST") 
-# data202001 <- merge(data202001,listsize202001,by="PRACTICE") 
-# 
-# listsize202002 <- read.csv("2020_02_listsize.csv")[,c(6,10)] 
-# names(listsize202002) <- c("PRACTICE", "LIST.SIZE") 
-# data202002 <- ddply(data202002,.(PRACTICE_CODE, YEAR_MONTH),summarise,ITEMS = sum(QUANTITY),ACT.COST = sum(ACTUAL_COST))
-# names(data202002) <- c("PRACTICE", "PERIOD", "ITEMS","ACT.COST") 
-# data202002 <- merge(data202002,listsize202002,by="PRACTICE") 
-# 
-# listsize202003 <- read.csv("2020_03_listsize.csv")[,c(6,10)] 
-# names(listsize202003) <- c("PRACTICE", "LIST.SIZE") 
-# data202003 <- ddply(data202003,.(PRACTICE_CODE, YEAR_MONTH),summarise,ITEMS = sum(QUANTITY),ACT.COST = sum(ACTUAL_COST))
-# names(data202003) <- c("PRACTICE", "PERIOD", "ITEMS","ACT.COST") 
-# data202003 <- merge(data202003,listsize202003,by="PRACTICE") 
-# 
-# listsize202004 <- read.csv("2020_04_listsize.csv")[,c(6,10)] 
-# names(listsize202004) <- c("PRACTICE", "LIST.SIZE") 
-# data202004 <- ddply(data202004,.(PRACTICE_CODE, YEAR_MONTH),summarise,ITEMS = sum(QUANTITY),ACT.COST = sum(ACTUAL_COST))
-# names(data202004) <- c("PRACTICE", "PERIOD", "ITEMS","ACT.COST") 
-# data202004 <- merge(data202004,listsize202004,by="PRACTICE") 
-# 
-# listsize202005 <- read.csv("2020_05_listsize.csv")[,c(6,10)] 
-# names(listsize202005) <- c("PRACTICE", "LIST.SIZE") 
-# data202005 <- ddply(data202005,.(PRACTICE_CODE, YEAR_MONTH),summarise,ITEMS = sum(QUANTITY),ACT.COST = sum(ACTUAL_COST))
-# names(data202005) <- c("PRACTICE", "PERIOD", "ITEMS","ACT.COST") 
-# data202005 <- merge(data202005,listsize202005,by="PRACTICE") 
-# 
-# listsize202006 <- read.csv("2020_06_listsize.csv")[,c(6,10)] 
-# names(listsize202006) <- c("PRACTICE", "LIST.SIZE") 
-# data202006 <- ddply(data202006,.(PRACTICE_CODE, YEAR_MONTH),summarise,ITEMS = sum(QUANTITY),ACT.COST = sum(ACTUAL_COST))
-# names(data202006) <- c("PRACTICE", "PERIOD", "ITEMS","ACT.COST") 
-# data202006 <- merge(data202006,listsize202006,by="PRACTICE") 
 
 
 # combine monthly datasets into single data frame and save
